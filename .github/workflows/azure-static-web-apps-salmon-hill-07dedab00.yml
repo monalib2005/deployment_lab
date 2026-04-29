@@ -51,7 +51,7 @@ jobs:
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
         env:
-          VITE_API_BASE_URL: https://mernblog-d5a5dugng0h3b6ha.centralindia-01.azurewebsites.net
+          VITE_API_BASE_URL: https://mernblog-d5a5dugng0h3b6ha.centralindia-01.azurewebsites.net/api
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
