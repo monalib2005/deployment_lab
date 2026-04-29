@@ -1,0 +1,13 @@
+{
+  "name": "deployment_lab",
+  "version": "1.0.0",
+  "description": "This repo contains multiple mini projects for deployment practice.",
+  "main": "index.js",
+  "scripts": {
+    "dev:blog": "cd apps/mern-blog && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
