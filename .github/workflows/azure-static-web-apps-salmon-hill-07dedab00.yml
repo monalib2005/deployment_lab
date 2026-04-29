@@ -56,3 +56,5 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
+    env:
+         VITE_API_BASE_URL: mernblog-d5a5dugng0h3b6ha.centralindia-01.azurewebsites.net
