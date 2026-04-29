@@ -21,9 +21,10 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '24.x'
+          node-version: '18.x'  # version changed
 
       - name: npm install, build, and test
+        working-directory: apps/mern_blog/server  #path changed
         run: |
           npm install
           npm run build --if-present
@@ -33,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: apps/mern_blog/server  #path changed
 
   deploy:
     runs-on: ubuntu-latest
