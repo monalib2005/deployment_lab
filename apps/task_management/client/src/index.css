@@ -133,6 +133,31 @@ body {
   align-items: center;
 }
 
+.edit-form {
+  margin-bottom: 15px;
+}
+
+.edit-input,
+.edit-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.edit-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .checkbox-wrapper {
   display: flex;
   align-items: center;
