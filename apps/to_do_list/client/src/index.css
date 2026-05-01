@@ -101,15 +101,76 @@ body {
   color: #7f8c8d;
 }
 
-.todo-delete {
-  padding: 8px 12px;
-  background-color: #e74c3c;
-  color: white;
+.todo-text {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.todo-text:hover {
+  background-color: #f8f9fa;
+}
+
+.todo-edit-input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.todo-edit-input:focus {
+  outline: none;
+  border-color: #2980b9;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.todo-edit, .todo-save, .todo-cancel, .todo-delete {
+  padding: 6px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s;
+}
+
+.todo-edit {
+  background-color: #f39c12;
+  color: white;
+}
+
+.todo-edit:hover {
+  background-color: #e67e22;
+}
+
+.todo-save {
+  background-color: #27ae60;
+  color: white;
+}
+
+.todo-save:hover {
+  background-color: #229954;
+}
+
+.todo-cancel {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.todo-cancel:hover {
+  background-color: #7f8c8d;
+}
+
+.todo-delete {
+  background-color: #e74c3c;
+  color: white;
 }
 
 .todo-delete:hover {

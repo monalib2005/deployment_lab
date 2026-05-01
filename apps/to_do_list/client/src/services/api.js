@@ -35,10 +35,30 @@ export const todoAPI = {
     }
   },
 
+  // Update todo title
+  updateTodo: async (id, title) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update todo');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error updating todo:', error);
+      throw error;
+    }
+  },
+
   // Toggle todo completion
   toggleTodo: async (id) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/todos/${id}/toggle`, {
         method: 'PUT',
       });
       if (!response.ok) {

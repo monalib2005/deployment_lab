@@ -8,6 +8,7 @@ A simple MERN stack application for event registration with predefined static ev
 - View event details
 - Register for events (name, email)
 - View registrations for each event
+- **NEW**: Full CRUD operations for events (Create, Read, Update, Delete)
 - Clean, minimal UI with basic CSS
 
 ## Tech Stack
@@ -108,12 +109,16 @@ event-register/
 3. Click on any event to see details and register
 4. Fill out the registration form with name and email
 5. View registrations for each event or all registrations
+6. **NEW**: Go to "Manage Events" to create, edit, or delete events
 
 ## API Endpoints
 
 ### Events
 - `GET /api/events` - Get all events
 - `GET /api/events/:id` - Get specific event by ID
+- `POST /api/events` - Create new event
+- `PUT /api/events/:id` - Update existing event
+- `DELETE /api/events/:id` - Delete event (and its registrations)
 
 ### Registrations
 - `POST /api/registrations` - Create new registration

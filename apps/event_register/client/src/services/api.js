@@ -18,6 +18,47 @@ const api = {
     return response.json();
   },
 
+  createEvent: async (eventData) => {
+    const response = await fetch(`${API_BASE_URL}/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(eventData),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to create event');
+    }
+    return response.json();
+  },
+
+  updateEvent: async (id, eventData) => {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(eventData),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to update event');
+    }
+    return response.json();
+  },
+
+  deleteEvent: async (id) => {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to delete event');
+    }
+    return response.json();
+  },
+
   // Registrations
   createRegistration: async (registrationData) => {
     const response = await fetch(`${API_BASE_URL}/registrations`, {
