@@ -237,6 +237,30 @@
   color: #34495e;
 }
 
+/* server {
+    listen 80;
+    server_name _;
+
+    # FRONTEND (React build)
+    location / {
+        root /home/mona123/deployment_lab/apps/mern_blog/client/dist; #give path correctly
+        index index.html;
+        try_files $uri /index.html;
+    }
+
+    # BACKEND API
+    location /api/ {
+        proxy_pass http://localhost:5000;  #add proper link of backend
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+} */
+
+/* mongodb+srv://monalib909:mona123@cluster0.h0sea3t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 */
+
 .post-body p {
   margin-bottom: 1rem;
 }
