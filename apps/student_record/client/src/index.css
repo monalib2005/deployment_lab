@@ -57,6 +57,299 @@ nav a.active {
   margin-bottom: 20px;
 }
 
+/* public class StudentController {
+
+    // Form object
+    public Student__c student {get; set;}
+
+    // Table records
+    public List<Student__c> studentList {get; set;}
+
+    // Constructor
+    public StudentController() {
+
+        student = new Student__c();
+
+        loadStudents();
+    }
+
+    // Load student records
+    public void loadStudents() {
+
+        studentList = [
+            SELECT Id, Name, Roll_No__c, Class__c, Phone__c
+            FROM Student__c
+            ORDER BY CreatedDate DESC
+        ];
+    }
+
+    // SAVE new student
+    public PageReference saveStudent() {
+
+        insert student;
+
+        student = new Student__c();
+
+        loadStudents();
+
+        return null;
+    }
+
+    // EDIT student
+    public void editStudent() {
+
+        Id studentId =
+            ApexPages.currentPage().getParameters().get('sid');
+
+        student = [
+            SELECT Id, Name, Roll_No__c, Class__c, Phone__c
+            FROM Student__c
+            WHERE Id = :studentId
+        ];
+    }
+
+    // UPDATE student
+    public PageReference updateStudent() {
+
+        update student;
+
+        student = new Student__c();
+
+        loadStudents();
+
+        return null;
+    }
+
+    // DELETE student
+    public void deleteStudent() {
+
+        Id studentId =
+            ApexPages.currentPage().getParameters().get('sid');
+
+        Student__c s = [
+            SELECT Id
+            FROM Student__c
+            WHERE Id = :studentId
+        ];
+
+        delete s;
+
+        loadStudents();
+    }
+
+    // CLEAR form
+    public void clearForm() {
+
+        student = new Student__c();
+    }
+} */
+
+/* <apex:page controller="StudentController">
+
+    <apex:form >
+
+        <apex:pageMessages />
+
+        <!-- FORM -->
+
+        <apex:pageBlock title="Student Record Management System">
+
+            <apex:pageBlockSection columns="1" id="formSection">
+
+                <apex:inputText value="{!student.Name}"
+                                label="Student Name"/>
+
+                <apex:inputText value="{!student.Roll_No__c}"
+                                label="Roll No"/>
+
+                <apex:inputText value="{!student.Class__c}"
+                                label="Class"/>
+
+                <apex:inputText value="{!student.Phone__c}"
+                                label="Phone Number"/>
+
+            </apex:pageBlockSection>
+
+            <!-- BUTTONS -->
+
+            <apex:pageBlockButtons >
+
+                <!-- SAVE -->
+
+                <apex:commandButton value="Save"
+                                    action="{!saveStudent}"
+                                    rerender="studentTable,formSection"/>
+
+                <!-- UPDATE -->
+
+                <apex:commandButton value="Update"
+                                    action="{!updateStudent}"
+                                    rerender="studentTable,formSection"/>
+
+                <!-- CLEAR -->
+
+                <apex:commandButton value="Clear"
+                                    action="{!clearForm}"
+                                    rerender="formSection"/>
+
+            </apex:pageBlockButtons>
+
+        </apex:pageBlock>
+
+        <!-- TABLE -->
+
+        <apex:pageBlock title="Student Records"
+                         id="studentTable">
+
+            <apex:pageBlockTable value="{!studentList}"
+                                 var="s">
+
+                <apex:column value="{!s.Name}"
+                             headerValue="Student Name"/>
+
+                <apex:column value="{!s.Roll_No__c}"
+                             headerValue="Roll No"/>
+
+                <apex:column value="{!s.Class__c}"
+                             headerValue="Class"/>
+
+                <apex:column value="{!s.Phone__c}"
+                             headerValue="Phone Number"/>
+
+                <!-- ACTIONS -->
+
+                <apex:column headerValue="Actions">
+
+                    <!-- EDIT -->
+
+                    <apex:commandLink value="Edit"
+                                      action="{!editStudent}"
+                                      rerender="formSection">
+
+                        <apex:param name="sid"
+                                    value="{!s.Id}"/>
+
+                    </apex:commandLink>
+
+                    &nbsp; | &nbsp;
+
+                    <!-- DELETE -->
+
+                    <apex:commandLink value="Delete"
+                                      action="{!deleteStudent}"
+                                      rerender="studentTable">
+
+                        <apex:param name="sid"
+                                    value="{!s.Id}"/>
+
+                    </apex:commandLink>
+
+                </apex:column>
+
+            </apex:pageBlockTable>
+
+        </apex:pageBlock>
+
+    </apex:form>
+
+</apex:page> */
+
+/* public class BankAccount {
+    public static void addBank(Integer empId,String empname,String email,Date dob,String dept)
+    {
+        if(empId == null)
+        {
+            System.debug('Error: Employee Id should not null');
+            return;
+        }
+        
+        List<Bank__c> lis = [
+            SELECT Id 
+            FROM Bank__c
+            WHERE Emp_ID__c = :empId
+        ];
+        
+        if(!lis.isEmpty())
+        {
+            System.debug('Error: EMployee already their');
+            return;
+        }
+        
+        if(String.isBlank(email) || !email.contains('@'))
+        {
+            System.debug('Error: Email is required');
+            return;
+        }
+        
+        if(String.isBlank(dept))
+        {
+            System.debug('Error: Dept is required');
+            return;
+        }
+        
+        Bank__c acc = new Bank__c();
+        
+        acc.Emp_ID__c = empId;
+        acc.Name = empname;
+        acc.Email__c = email;
+        acc.Birth_Date__c = dob;
+        acc.Department__c = dept;
+        
+        insert acc;
+        
+        System.debug('Employee added successfully!!');
+    }
+    
+    public static void viewbank()
+    {
+        List<Bank__c> bankList = [
+            SELECT Id,Emp_ID__c,Name,Email__c,Birth_Date__c,Department__c
+            FROM Bank__c
+        ];
+        
+        for(Bank__c acc : bankList)
+        {
+            System.debug('-------------------------');
+            System.debug('Employee Id: ' + acc.Emp_ID__c);
+            System.debug('Employee name: ' + acc.Name);
+            System.debug('Employee Email: ' + acc.Email__c);
+            System.debug('Employee DOB: ' + acc.Birth_Date__c);
+            System.debug('Employee Department: ' + acc.Department__c);
+        }
+    }
+    
+    public static void updateBank(Id recordId,String newDept)
+    {
+        Bank__c acc = [
+            SELECT Id,Department__c
+            FROM Bank__c
+            WHERE Id = :recordId
+            LIMIT 1
+        ];
+        
+        acc.Department__c = newDept;
+        
+        update acc;
+        
+        System.debug('Employee updated successfully!');
+        
+    }
+    
+    public static void deletebank(Id recordId)
+    {
+        Bank__c acc = [
+            SELECT Id
+            FROM Bank__c
+            WHERE Id = :recordId
+            LIMIT 1
+        ];
+        
+        delete acc;
+        
+        System.debug('System deleted successfully!!');
+    }
+} */
+
 .btn {
   display: inline-block;
   padding: 8px 16px;
@@ -134,6 +427,68 @@ nav a.active {
   border-collapse: collapse;
   margin-top: 20px;
 }
+
+/* public class EmailController {
+
+    public String toEmail { get; set; }
+    public String subject { get; set; }
+    public String body { get; set; }
+    public String message { get; set; }
+
+    // For file upload
+    public Blob fileBody { get; set; }
+    public String fileName { get; set; }
+
+    public void sendEmail() {
+
+        // Email validation
+        if(String.isBlank(toEmail) || !Pattern.matches('^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$', toEmail)) {
+            message = 'Invalid Email Address!';
+            return;
+        }
+
+        try {
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+
+            mail.setToAddresses(new String[] {toEmail});
+            mail.setSubject(subject);
+            mail.setPlainTextBody(body);
+
+            // ✅ Attach file ONLY if uploaded
+            if(fileBody != null) {
+                Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
+                attachment.setFileName(fileName);
+                attachment.setBody(fileBody);
+                mail.setFileAttachments(new Messaging.EmailFileAttachment[] {attachment});
+            }
+
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] {mail});
+
+            message = 'Email Sent Successfully with Attachment!';
+
+        } catch(Exception e) {
+            message = 'Error: ' + e.getMessage();
+        }
+    }
+} */
+
+/* <apex:page controller="EmailController">
+  <apex:form enctype="multipart/form-data">
+    <apex:pageBlock title="Email Send With Attachment">
+      <apex:pageBlockSection columns="1">
+        <apex:inputText value="{!toEmail}" label="Email Receiver"/>
+        <apex:inputText value="{!subject}" label="Subject"/>
+        <apex:inputTextarea value="{!body}" label="Body"/>
+        
+        <apex:inputFile value="{!fileBody}" filename="{!fileName}"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockButtons >
+        <apex:commandButton value="Send Email" action="{!sendEmail}"/>
+      </apex:pageBlockButtons>
+      <apex:outputText value="{!message}" style="color:blue; font-weight:bold;"/>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page> */
 
 .table th,
 .table td {
